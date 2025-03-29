@@ -2,10 +2,10 @@
 import React from "react";
 import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 
-import NumberInput from "./ui/NumberInput";
+import NumberInput from "../ui/NumberInput";
 
-import { MultiSelect } from "./ui/MultiSelect";
-import { Input } from "./ui/input";
+import { MultiSelect } from "../ui/MultiSelect";
+import { Input } from "../ui/input";
 import {
   Select,
   SelectContent,
@@ -13,11 +13,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { Textarea } from "./ui/textarea";
+} from "../ui/select";
+import { Textarea } from "../ui/textarea";
 
-import { NumericFormatType } from "../types/index";
-import { SearchableDropdown } from "./ui/searchable-dropdown";
+import { NumericFormatType } from "../../types/index";
+import { SearchableDropdown } from "../ui/searchable-dropdown";
 
 export interface BaseField {
   label: string;
@@ -74,18 +74,18 @@ export type FormInputFields<TData> = (
 
 interface IProps<TData extends FieldValues> {
   field: ControllerRenderProps<TData, Path<TData>>;
-  sectionField: FormInputFields<TData>;
+  fieldConfig: FormInputFields<TData>;
 }
 
 export function RenderFormInput<TData extends FieldValues>({
   field,
-  sectionField,
+  fieldConfig,
 }: IProps<TData>) {
   function renderInput<TData extends FieldValues>({
     field,
-    sectionField,
+    fieldConfig,
   }: IProps<TData>) {
-    switch (sectionField.fieldVariant) {
+    switch (fieldConfig.fieldVariant) {
       case "select":
         return (
           <Select
@@ -93,23 +93,23 @@ export function RenderFormInput<TData extends FieldValues>({
               field.onChange(value);
             }}
             value={field.value}
-            disabled={sectionField?.disabled}
+            disabled={fieldConfig?.disabled}
           >
             <SelectTrigger className="h-8 rounded-xl bg-white text-sm font-normal text-foreground lg:h-[43px] lg:text-base">
               <SelectValue
                 placeholder={
                   field?.value
-                    ? sectionField?.options.find(
+                    ? fieldConfig?.options.find(
                         (option) => option.value === field.value
                       )?.name
-                    : sectionField?.placeHolder
+                    : fieldConfig?.placeHolder
                 }
               />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {sectionField?.options &&
-                  sectionField?.options.map((option) => (
+                {fieldConfig?.options &&
+                  fieldConfig?.options.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.name}
                     </SelectItem>
@@ -122,25 +122,24 @@ export function RenderFormInput<TData extends FieldValues>({
         return (
           <Textarea
             {...field}
-            disabled={sectionField?.disabled}
-            placeholder={sectionField?.placeHolder}
+            disabled={fieldConfig?.disabled}
+            placeholder={fieldConfig?.placeHolder}
             className="rounded-xl border-none bg-lightblue-foreground text-sm font-normal lg:text-base"
           />
         );
       case "multiSelect":
-        //TODO : - Arjun The default value should be array of object with name and value
         return (
           <MultiSelect
-            onValueChange={({ value }) => {
+            onValueChange={(value) => {
               field.onChange(value);
             }}
             value={Array.isArray(field.value) ? field.value : []}
-            placeholder={sectionField?.placeHolder}
-            options={sectionField?.options || []}
+            placeholder={fieldConfig?.placeHolder}
+            options={fieldConfig?.options || []}
             variant="inverted"
             animation={2}
             maxCount={3}
-            disabled={sectionField?.disabled}
+            disabled={fieldConfig?.disabled}
           />
         );
       case "currencyInput":
@@ -151,13 +150,13 @@ export function RenderFormInput<TData extends FieldValues>({
             {...field}
             placeholder="Enter your net worth"
             className="border-none pl-0 text-sm font-normal lg:text-base"
-            disabled={sectionField?.disabled}
+            disabled={fieldConfig?.disabled}
           />
         );
       case "singleSearchableSelect":
         return (
           <SearchableDropdown
-            options={sectionField.options}
+            options={fieldConfig.options}
             selectedValue={field.value}
             onChange={field.onChange}
           />
@@ -165,20 +164,20 @@ export function RenderFormInput<TData extends FieldValues>({
       default:
         return (
           <Input
-            maxLength={sectionField.inputMaxLength}
-            type={sectionField.inputType || "text"}
+            maxLength={fieldConfig.inputMaxLength}
+            type={fieldConfig.inputType || "text"}
             inputContainerClassName="bg-transparent"
             className="h-8 rounded-xl border-none bg-lightblue-foreground text-sm font-normal lg:h-[46px] lg:text-base"
-            PrefixIcon={sectionField.prefixIcon}
+            PrefixIcon={fieldConfig.prefixIcon}
             onChange={(e) => {
               field.onChange(e.target.value);
             }}
             value={field.value}
-            disabled={sectionField?.disabled}
-            placeholder={sectionField?.placeHolder}
+            disabled={fieldConfig?.disabled}
+            placeholder={fieldConfig?.placeHolder}
           />
         );
     }
   }
-  return <> {renderInput<TData>({ field, sectionField })} </>;
+  return <> {renderInput<TData>({ field, fieldConfig })} </>;
 }

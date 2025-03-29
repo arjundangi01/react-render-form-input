@@ -1,6 +1,6 @@
 {
   "name": "react-render-form-input",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A React component to render various form inputs",
   "main": "dist/index.js",
   "module": "dist/index.js",

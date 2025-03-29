@@ -69,13 +69,7 @@ interface MultiSelectProps
    * Callback function triggered when the selected values change.
    * Receives an array of the new selected values.
    */
-  onValueChange: ({
-    option,
-    value,
-  }: {
-    option: OptionType[];
-    value: string[];
-  }) => void;
+  onValueChange: (value: OptionType[]) => void;
 
   /** The default selected values when the component mounts. */
   value: OptionType[];
@@ -172,10 +166,7 @@ export const MultiSelect = React.forwardRef<
         const newSelectedValues = [...value];
         newSelectedValues.pop();
 
-        onValueChange({
-          option: newSelectedValues,
-          value: newSelectedValues.map((o) => o.value),
-        });
+        onValueChange(newSelectedValues);
       }
     };
 
@@ -187,14 +178,11 @@ export const MultiSelect = React.forwardRef<
         ? value.filter((v) => v.value !== option.value)
         : [...value, option];
 
-      onValueChange({
-        option: newSelectedValues,
-        value: newSelectedValues.map((o) => o.value),
-      });
+      onValueChange(newSelectedValues);
     };
 
     const handleClear = () => {
-      onValueChange({ option: [], value: [] });
+      onValueChange([]);
     };
 
     const handleTogglePopover = () => {
@@ -204,17 +192,14 @@ export const MultiSelect = React.forwardRef<
     const clearExtraOptions = () => {
       const newSelectedValues = value.slice(0, maxCount);
 
-      onValueChange({
-        option: newSelectedValues,
-        value: newSelectedValues.map((o) => o.value),
-      });
+      onValueChange(newSelectedValues);
     };
 
     const toggleAll = () => {
       if (value.length === options.length) {
         handleClear();
       } else {
-        onValueChange({ option: options, value: options.map((o) => o.value) });
+        onValueChange(options);
       }
     };
 
