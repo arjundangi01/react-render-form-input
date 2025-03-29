@@ -18,16 +18,16 @@ TypeScript Support – Provides strong type safety with FieldValues.
 
 Install via npm or yarn:
 
-npm install react-render-form-input
+```npm install react-render-form-input```
 
 or
 
-yarn add react-render-form-input
+```yarn add react-render-form-input```
 
 🛠️ Usage
 
 1. Setup useForm
-
+```
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormInputWrapper } from "react-render-form-input";
@@ -76,7 +76,7 @@ fieldConfig={{
 
 );
 }
-
+```
 📌 Props
 
 FormInputWrapper<TData extends FieldValues>
@@ -115,6 +115,12 @@ singleFileInput – File upload input
 
 phoneInput – Phone number input
 
+select -  select
+
+multiselect - multi select
+
+searchableSelect - select with search
+
 More types can be extended easily!
 
 📜 License
@@ -125,6 +131,6 @@ MIT License.
 
 Contributions are welcome! Feel free to open an issue or PR on GitHub.
 
-For support, contact [your email or Discord].
+For support, contact arjundangi907473@gmail.com.
 
 This package is designed to simplify form handling in React projects by reducing repetitive form input boilerplate. 🚀
