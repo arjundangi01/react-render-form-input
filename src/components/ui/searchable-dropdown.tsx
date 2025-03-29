@@ -15,6 +15,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { cn } from "../../utils";
 import { Input } from "./input";
+import { SearchableDropdownProps } from "../../types";
 
 // Extract constants
 const FILTER_SCORES = {
@@ -23,20 +24,6 @@ const FILTER_SCORES = {
   CONTAINS: 0.6,
   NO_MATCH: 0,
 } as const;
-
-// Improve type safety with strict typing
-interface Option {
-  name: string;
-  value: string;
-}
-
-interface SearchableDropdownProps {
-  options: Option[];
-  selectedValue: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  onSearch?: (value: string) => void;
-}
 
 export function SearchableDropdown({
   options,
@@ -62,7 +49,7 @@ export function SearchableDropdown({
       if (!option) return FILTER_SCORES.NO_MATCH;
 
       const searchLower = search.toLowerCase();
-      const nameLower = option.name.toLowerCase();
+      const nameLower = option.label.toLowerCase();
 
       if (nameLower === searchLower) return FILTER_SCORES.EXACT_MATCH;
       if (nameLower.startsWith(searchLower)) return FILTER_SCORES.STARTS_WITH;
@@ -90,7 +77,7 @@ export function SearchableDropdown({
           aria-expanded={open}
           className="mt-2 w-full justify-between bg-accent/10 text-sm"
         >
-          {selectedOption?.name ?? placeholder}
+          {selectedOption?.label ?? placeholder}
           <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -119,7 +106,7 @@ export function SearchableDropdown({
                     value={option.value}
                     onSelect={handleSelect}
                   >
-                    <span className="text-sm  font-normal">{option.name}</span>
+                    <span className="text-sm  font-normal">{option.label}</span>
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",

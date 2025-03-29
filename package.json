@@ -1,11 +1,14 @@
 {
   "name": "react-render-form-input",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A React component to render various form inputs",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-   "files": ["dist"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build"
@@ -108,6 +111,7 @@
     "react-icons": "^5.2.1",
     "react-intersection-observer": "^9.13.1",
     "react-phone-number-input": "^3.4.10",
+    "react-select": "^5.10.0",
     "react-simple-maps": "^3.0.0",
     "react-social-icons": "^6.18.0",
     "recharts": "^2.13.3",
@@ -126,7 +130,6 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
- 
     "@types/bcrypt": "^5.0.2",
     "@types/geojson": "^7946.0.14",
     "@types/glob": "^8.1.0",

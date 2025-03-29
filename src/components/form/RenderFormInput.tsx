@@ -1,81 +1,15 @@
 "use client";
-import React from "react";
-import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
+import Select from "react-select";
 
 import NumberInput from "../ui/NumberInput";
 
-import { MultiSelect } from "../ui/MultiSelect";
 import { Input } from "../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+
 import { Textarea } from "../ui/textarea";
 
-import { NumericFormatType } from "../../types/index";
 import { SearchableDropdown } from "../ui/searchable-dropdown";
-
-export interface BaseField {
-  label: string;
-  prefixIcon?: React.ReactNode;
-  className?: string;
-  placeHolder?: string;
-  numericFormat?: NumericFormatType;
-  disabled?: boolean;
-}
-export interface IInputFieldVariant {
-  fieldVariant: "input";
-  inputType?: "number" | "text" | "email" | "password" | "tel" | "url";
-  inputMaxLength?: number;
-  label: string;
-  value?: string;
-}
-
-export interface ICurrencyInputFieldVariant {
-  fieldVariant: "currencyInput";
-  label: string;
-  value?: string;
-}
-export interface ISelectFieldVariant {
-  fieldVariant: "select";
-  inputMaxLength?: number;
-  options: Array<{ value: string; name: string }>;
-}
-export interface IMultiSelectFieldVariant {
-  fieldVariant: "multiSelect";
-  inputMaxLength?: number;
-  options: Array<{ value: string; name: string }>;
-}
-export interface ITextAreaFieldVariant {
-  fieldVariant: "textArea";
-  inputType?: "text";
-}
-
-export interface ISingleSearchableSelectFieldVariant {
-  fieldVariant: "singleSearchableSelect";
-  options: Array<{ value: string; name: string }>;
-}
-
-export type FormInputFields<TData> = (
-  | IInputFieldVariant
-  | ISelectFieldVariant
-  | ITextAreaFieldVariant
-  | IMultiSelectFieldVariant
-  | ICurrencyInputFieldVariant
-  | ISingleSearchableSelectFieldVariant
-) &
-  BaseField & {
-    name: keyof TData;
-  };
-
-interface IProps<TData extends FieldValues> {
-  field: ControllerRenderProps<TData, Path<TData>>;
-  fieldConfig: FormInputFields<TData>;
-}
+import { IOptions, IProps } from "../../types";
 
 export function RenderFormInput<TData extends FieldValues>({
   field,
@@ -88,36 +22,16 @@ export function RenderFormInput<TData extends FieldValues>({
     switch (fieldConfig.fieldVariant) {
       case "select":
         return (
-          <Select
-            onValueChange={(value) => {
+          <Select<IOptions>
+            placeholder={fieldConfig.placeHolder}
+            value={field.value}
+            options={fieldConfig.options}
+            onChange={(value) => {
               field.onChange(value);
             }}
-            value={field.value}
-            disabled={fieldConfig?.disabled}
-          >
-            <SelectTrigger className="h-8 rounded-xl bg-white text-sm font-normal text-foreground lg:h-[43px] lg:text-base">
-              <SelectValue
-                placeholder={
-                  field?.value
-                    ? fieldConfig?.options.find(
-                        (option) => option.value === field.value
-                      )?.name
-                    : fieldConfig?.placeHolder
-                }
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {fieldConfig?.options &&
-                  fieldConfig?.options.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.name}
-                    </SelectItem>
-                  ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          />
         );
+
       case "textArea":
         return (
           <Textarea
@@ -129,17 +43,14 @@ export function RenderFormInput<TData extends FieldValues>({
         );
       case "multiSelect":
         return (
-          <MultiSelect
-            onValueChange={(value) => {
+          <Select<IOptions, true>
+            placeholder="Select a value"
+            isMulti={true}
+            value={field.value}
+            onChange={(value) => {
               field.onChange(value);
             }}
-            value={Array.isArray(field.value) ? field.value : []}
-            placeholder={fieldConfig?.placeHolder}
-            options={fieldConfig?.options || []}
-            variant="inverted"
-            animation={2}
-            maxCount={3}
-            disabled={fieldConfig?.disabled}
+            options={fieldConfig.options}
           />
         );
       case "currencyInput":
