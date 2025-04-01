@@ -18,51 +18,51 @@ TypeScript Support – Provides strong type safety with FieldValues.
 
 Install via npm or yarn:
 
-```npm install react-render-form-input```
+`npm install react-render-form-input`
 
 or
 
-```yarn add react-render-form-input```
+`yarn add react-render-form-input`
 
 🛠️ Usage
 
 1. Setup useForm
+
 ```
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormInputWrapper } from "react-render-form-input";
-import \* as z from "zod";
+  import { useForm } from "react-hook-form";
+  import { zodResolver } from "@hookform/resolvers/zod";
+  import { FormInputWrapper } from "react-render-form-input";
+  import \* as z from "zod";
 
 // Define schema using Zod (optional)
-const formSchema = z.object({
-name: z.string().min(1, "Name is required"),
-email: z.string().email("Invalid email"),
-});
+    const formSchema = z.object({
+      name: z.string().min(1, "Name is required"),
+      email: z.string().email("Invalid email"),
+    });
 
-export default function MyForm() {
-const form = useForm({
-resolver: zodResolver(formSchema),
-mode: "onChange",
-defaultValues: { name: "", email: "" },
-});
+  export default function MyForm() {
+      const form = useForm({
+      resolver: zodResolver(formSchema),
+      mode: "onChange",
+      defaultValues: { name: "", email: "" },
+  });
 
-return (
+  return (
 
-<form onSubmit={form.handleSubmit((data) => console.log(data))}>
-<FormInputWrapper
-form={form}
-name="name"
-fieldConfig={{
-          fieldVariant: "input",
-          label: "Full Name",
-          name: "name",
-          placeHolder: "Enter your name",
-        }}
-/>
+  <form onSubmit={form.handleSubmit((data) => console.log(data))}>
+        <FormInputWrapper
+        form={form}
+        name="name"
+        fieldConfig={{
+              fieldVariant: "input",
+              label: "Full Name",
+              name: "name",
+              placeHolder: "Enter your name",
+            }}
+      />
 
       <FormInputWrapper
         form={form}
-        name="email"
         fieldConfig={{
           fieldVariant: "input",
           label: "Email",
@@ -74,9 +74,10 @@ fieldConfig={{
       <button type="submit">Submit</button>
     </form>
 
-);
-}
+  );
+  }
 ```
+
 📌 Props
 
 FormInputWrapper<TData extends FieldValues>
@@ -115,7 +116,7 @@ singleFileInput – File upload input
 
 phoneInput – Phone number input
 
-select -  select
+select - select
 
 multiselect - multi select
 

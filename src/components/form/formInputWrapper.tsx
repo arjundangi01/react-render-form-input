@@ -11,7 +11,8 @@ import {
   FormItem,
   FormLabel,
 } from "../ui/form";
-import { type FormInputFields, RenderFormInput } from "./RenderFormInput";
+import { RenderFormInput } from "./RenderFormInput";
+import { FormInputFields } from "../../types";
 
 interface IProps<TData extends FieldValues> {
   form: UseFormReturn<TData>;
