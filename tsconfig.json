@@ -10,14 +10,8 @@
       "esModuleInterop": true,
       "skipLibCheck": true,
       "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "baseUrl": ".",
-      "paths": {
-			 "@/*": ["./src/*"],
-       "@components/*": ["./src/components/*"]
-		},
+      "resolveJsonModule": true      
     },
-    "include": ["src"],
-    "exclude": ["node_modules", "dist"]
+    "include": ["src"]
   }
   
