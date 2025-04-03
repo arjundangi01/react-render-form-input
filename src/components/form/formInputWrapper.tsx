@@ -10,9 +10,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from "../ui/form";
-import { RenderFormInput } from "./RenderFormInput";
-import { FormInputFields } from "../../types";
+} from "@/components/ui/form";
+import { RenderFormInput } from "@/components/form/RenderFormInput";
+import { FormInputFields } from "@/types";
 
 interface IProps<TData extends FieldValues> {
   form: UseFormReturn<TData>;

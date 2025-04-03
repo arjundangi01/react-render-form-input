@@ -2,14 +2,14 @@
 import { FieldValues } from "react-hook-form";
 import Select from "react-select";
 
-import NumberInput from "../ui/NumberInput";
+import NumberInput from "@components/ui/NumberInput";
 
-import { Input } from "../ui/input";
+import { Input } from "@components/ui/input";
 
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "@components/ui/textarea";
 
-import { SearchableDropdown } from "../ui/searchable-dropdown";
-import { IOptions, IProps } from "../../types";
+import { SearchableDropdown } from "@components/ui/searchable-dropdown";
+import { IOptions, IProps } from "@/types";
 
 export function RenderFormInput<TData extends FieldValues>({
   field,

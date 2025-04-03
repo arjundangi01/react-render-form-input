@@ -74,37 +74,12 @@ or
       </form>
   <Form/>
 
+            <button type="submit">Submit</button>
+          </form>
+      <Form>
   );
   }
 ```
-
-📌 Props
-
-FormInputWrapper<TData extends FieldValues>
-
-Prop
-
-Type
-
-Description
-
-form
-
-UseFormReturn<TData>
-
-Instance of react-hook-form to control fields.
-
-name
-
-Path<TData>
-
-Name of the form field.
-
-fieldConfig
-
-FormInputFields<TData>
-
-Configuration object for rendering the input.
 
 🎛 Supported Field Types
 
