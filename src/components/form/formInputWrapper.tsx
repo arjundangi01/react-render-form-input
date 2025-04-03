@@ -16,7 +16,6 @@ import { FormInputFields } from "../../types";
 
 interface IProps<TData extends FieldValues> {
   form: UseFormReturn<TData>;
-  name: Path<TData>;
   fieldConfig: FormInputFields<TData>;
 }
 
