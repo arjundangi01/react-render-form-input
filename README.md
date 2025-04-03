@@ -31,7 +31,7 @@ or
 ```
   import { useForm } from "react-hook-form";
   import { zodResolver } from "@hookform/resolvers/zod";
-  import { FormInputWrapper } from "react-render-form-input";
+  import { FormInputWrapper,Form } from "react-render-form-input";
   import \* as z from "zod";
 
 // Define schema using Zod (optional)
@@ -49,62 +49,35 @@ or
 
   return (
 
-  <form onSubmit={form.handleSubmit((data) => console.log(data))}>
-        <FormInputWrapper
-        form={form}
-        name="name"
-        fieldConfig={{
-              fieldVariant: "input",
-              label: "Full Name",
-              name: "name",
-              placeHolder: "Enter your name",
-            }}
-      />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit((data) => console.log(data))}>
+              <FormInputWrapper
+              form={form}
+              name="name"
+              fieldConfig={{
+                    fieldVariant: "input",
+                    label: "Full Name",
+                    name: "name",
+                    placeHolder: "Enter your name",
+                  }}
+            />
 
-      <FormInputWrapper
-        form={form}
-        fieldConfig={{
-          fieldVariant: "input",
-          label: "Email",
-          name: "email",
-          placeHolder: "Enter your email",
-        }}
-      />
+            <FormInputWrapper
+              form={form}
+              fieldConfig={{
+                fieldVariant: "input",
+                label: "Email",
+                name: "email",
+                placeHolder: "Enter your email",
+              }}
+            />
 
-      <button type="submit">Submit</button>
-    </form>
-
+            <button type="submit">Submit</button>
+          </form>
+      <Form>
   );
   }
 ```
-
-📌 Props
-
-FormInputWrapper<TData extends FieldValues>
-
-Prop
-
-Type
-
-Description
-
-form
-
-UseFormReturn<TData>
-
-Instance of react-hook-form to control fields.
-
-name
-
-Path<TData>
-
-Name of the form field.
-
-fieldConfig
-
-FormInputFields<TData>
-
-Configuration object for rendering the input.
 
 🎛 Supported Field Types
 

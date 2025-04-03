@@ -1,2 +1,3 @@
-export { RenderFormInput } from "./form/RenderFormInput";
-export { FormInputWrapper } from "./form/formInputWrapper";
+export { RenderFormInput } from "@/components/form/RenderFormInput";
+export { FormInputWrapper } from "@/components/form/formInputWrapper";
+export { Form } from "@/components/ui";
