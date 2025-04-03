@@ -48,7 +48,7 @@ or
   });
 
   return (
-  <Form>
+  <Form {...form}>
     <form onSubmit={form.handleSubmit((data) => console.log(data))}>
         <FormInputWrapper
               form={form}

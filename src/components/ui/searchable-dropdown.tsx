@@ -107,14 +107,16 @@ export function SearchableDropdown({
                     onSelect={handleSelect}
                   >
                     <span className="text-sm  font-normal">{option.label}</span>
-                    <Check
-                      className={cn(
-                        "mr-2 h-4 w-4",
-                        selectedValue === option.value
-                          ? "opacity-100"
-                          : "opacity-0"
-                      )}
-                    />
+                    {selectedValue === option.value && (
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          selectedValue === option.value
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
+                    )}
                   </CommandItem>
                 ))}
               </CommandGroup>
